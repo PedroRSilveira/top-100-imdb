@@ -26,6 +26,9 @@ public class Program {
 		
 		Arquivo.adicionarFilme(filme);
 		
+		System.out.println();
+		
+		
 		Arquivo.imprimirLista();
 		
 		sc.close();
