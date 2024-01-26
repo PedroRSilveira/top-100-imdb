@@ -10,6 +10,11 @@ public class Filme {
 		this.posicao = posicao;
 	}
 	
+	//Vai ser usado para salvar os filmes da forma correta no arquivo:
+	public String converterParaString() {
+		return posicao + "," + name;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -25,7 +30,7 @@ public class Filme {
 	public void setPosicao(Integer posicao) {
 		this.posicao = posicao;
 	}
-
+	
 	@Override
 	public String toString() {
 		return posicao + ". " + name;
