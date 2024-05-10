@@ -10,8 +10,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Arquivo {
+	
+	static Scanner sc = new Scanner(System.in);
 	
 	public Arquivo() {
 	}
@@ -40,6 +43,8 @@ public class Arquivo {
 		return list;
 	}
 
+	static List<Filme> filmes = lerLista();
+	
 	public static void imprimirLista() {
 		
 		List<Filme> filmes = lerLista();
@@ -96,11 +101,37 @@ public class Arquivo {
 		}
 	}
 	
-	public static void editarFilme(int pos) {
-		
+	public static void editarFilme(int pos) throws IOException {
+		if(!assistidos.contains(pos)) {
+			System.out.println("O filme " + pos + " ainda não foi assistido");
+		}else {
+			assistidos.remove(pos - 1);
+			
+			filmes.remove(pos - 1);
+			
+			System.out.print("Digite o nome do filme: ");
+			String nome = sc.nextLine();
+			
+			System.out.println("Em qual posição quer colocar o filme?");
+			int nPos = sc.nextInt();
+			
+			Filme nFilme = new Filme(nome, nPos);
+			adicionarFilme(nFilme);
+		}
 	}
 	
-	public static void excluirFilme(int pos) {
-		
+	public static void excluirFilme(int pos) throws IOException {
+	    int indexToRemove = filmes.indexOf(new Filme("", pos)); // Encontra o índice do filme com a posição "pos"
+	    if (indexToRemove != -1) { // Verifica se o filme foi encontrado na lista
+	        assistidos.remove(Integer.valueOf(filmes.get(indexToRemove).getPosicao())); // Remove o número da posição da lista assistidos
+	        filmes.remove(indexToRemove); // Remove o filme da lista filmes
+	        salvarLista(filmes);
+	        System.out.println("Filme removido com sucesso.");
+	    } else {
+	        System.out.println("Filme não encontrado.");
+	    }
 	}
+
+
+	
 }

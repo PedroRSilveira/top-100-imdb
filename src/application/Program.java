@@ -50,7 +50,7 @@ public class Program {
 				if(posfilme < 0 || posfilme > 100) {
 					System.out.println("Valor inválido, escolha um número entre 1 e 100\n");
 				}else {
-					Arquivo.editarFilme(posfilme);
+					//Arquivo.editarFilme(posfilme);
 					System.out.println("Você quer editar o nome/posição ou excluir um filme assistido?"
 									  + "\n1. Nome/Posição"
 									  + "\n2. Excluir"
