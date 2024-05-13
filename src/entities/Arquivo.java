@@ -121,11 +121,9 @@ public class Arquivo {
 	}
 	
 	public static void excluirFilme(int pos) throws IOException {
-	    int indexToRemove = filmes.indexOf(new Filme("", pos)); // Encontra o índice do filme com a posição "pos"
-	    if (indexToRemove != -1) { // Verifica se o filme foi encontrado na lista
-	        assistidos.remove(Integer.valueOf(filmes.get(indexToRemove).getPosicao())); // Remove o número da posição da lista assistidos
-	        filmes.remove(indexToRemove); // Remove o filme da lista filmes
-	        salvarLista(filmes);
+	    
+		if(){
+	    	
 	        System.out.println("Filme removido com sucesso.");
 	    } else {
 	        System.out.println("Filme não encontrado.");

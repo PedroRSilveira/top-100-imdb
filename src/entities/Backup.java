@@ -23,27 +23,30 @@ public class Backup {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = br.readLine();
-			while (line != null) {
-				String[] dados = line.split(",");
-				Integer posicao = Integer.parseInt(dados[0]);
-				String nome = dados[1];
-
-				Filme filme = new Filme(nome, posicao);
-				filmes[posicao] = filme;
-				
-				line = br.readLine();
+			for(int i=0; i<100; i++) {
+				if(line != null) {
+					String[] dados = line.split(",");
+					Integer posicao = Integer.parseInt(dados[0]);
+					String nome = dados[1];
+	
+					Filme filme = new Filme(nome, posicao);
+					filmes[posicao] = filme;
+					
+					line = br.readLine();
+				}
 			}
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
 		return filmes;
 	}
-
-	static Filme[] filmes = lerLista();
 	
 	public static void imprimirLista() {
+		Filme[] filmes = lerLista();
 		for(int i=0; i<100; i++) {
-			System.out.println(filmes[i]);
+			if(filmes[i] != null) {
+				System.out.println(filmes[i]);
+			}
 		}
 	}
 	
@@ -53,8 +56,10 @@ public class Backup {
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		for(int i=0; i<100; i++) {
-			bw.write(filmes[i].converterParaString());
-			bw.newLine();
+			if(filmes[i] != null) {
+				bw.write(filmes[i].converterParaString());
+				bw.newLine();
+			}
 		}
 		
 		bw.close();
@@ -73,19 +78,31 @@ public class Backup {
 		return assistidos;
 	}
 	
-	static boolean[] assistidos = filmesAssistidos(lerLista());
-	
 	public static void adicionarFilme(Filme filme) throws IOException {
+		Filme[] filmes = lerLista();
+		boolean[] assistidos = filmesAssistidos(filmes);
 		int pos = filme.getPosicao();
 		
-		filmes[pos - 1] = filme;
-		assistidos[pos - 1] = true;
+		if(assistidos[pos] == true) {
+			System.out.println("Você já salvou um filme na posição " + pos);
+		}else {		
+			filmes[pos - 1] = filme;
+			assistidos[pos - 1] = true;
+		}
 		
 		salvarLista(filmes);
 	}
 	
 	public static void sortear() {
-		if(assistidos.length < 100) {
+		boolean[] assistidos = filmesAssistidos(lerLista());
+		int cont = 0;
+		for(int i=0; i<100; i++) {
+			if(assistidos[i] != false) {
+				cont = 1;
+			}
+		}
+		
+		if(cont == 1) {
 			Random random = new Random();
 			int proximoFilme;
 			
@@ -98,14 +115,14 @@ public class Backup {
 		}
 	}
 	
-	@SuppressWarnings("null")
 	public static void editarFilme(int pos) throws IOException {
+		boolean[] assistidos = filmesAssistidos(lerLista());
 		if(!assistidos[pos]) {
 			System.out.println("O filme " + pos + " ainda não foi assistido");
 		}else {
-			
-			assistidos[pos - 1] = (Boolean) null;
-			filmes[pos - 1] = (Filme) null;
+			Filme[] filmes = lerLista();
+			assistidos[pos] = false;
+			filmes[pos] = (Filme) null;
 			
 			System.out.print("Digite o nome do filme: ");
 			String nome = sc.nextLine();
@@ -119,7 +136,8 @@ public class Backup {
 	}
 	
 	public static void excluirFilme(int pos) throws IOException {
-	    if(assistidos[pos]) {
+		boolean[] assistidos = filmesAssistidos(lerLista());
+		if(assistidos[pos] != false) {
 	    	//Implementar método de exclusão de exclusão de vídeo.
 	    }else {
 	    	System.out.println("O filme " + pos + " ainda não foi assistido");

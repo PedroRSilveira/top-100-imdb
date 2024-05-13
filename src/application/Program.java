@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import entities.Arquivo;
+import entities.Backup;
 import entities.Filme;
 
 public class Program {
@@ -29,7 +30,9 @@ public class Program {
 			
 			switch(opcao) {
 			case 1:
-				Arquivo.imprimirLista();
+				//Arquivo.imprimirLista();
+				System.out.println("\nVetor:");
+				Backup.imprimirLista();
 				System.out.println();
 				break;
 				
@@ -40,7 +43,9 @@ public class Program {
 				System.out.print("Digite a posição no ranking do filme: ");
 				Integer pos = sc.nextInt();
 				Filme filme = new Filme(nome, pos);
-				Arquivo.adicionarFilme(filme);
+				//Arquivo.adicionarFilme(filme);
+				System.out.println("\nVetor");
+				Backup.adicionarFilme(filme);
 				System.out.println();
 				break;
 				
@@ -57,9 +62,11 @@ public class Program {
 									  + "\n3. Cancelar");
 					int opc = sc.nextInt();
 					if(opc == 1) {
-						Arquivo.editarFilme(posfilme);
+						//Arquivo.editarFilme(posfilme);
+						Backup.editarFilme(posfilme);
 					}else if(opc == 2) {
-						Arquivo.excluirFilme(posfilme);
+						//Arquivo.excluirFilme(posfilme);
+						Backup.excluirFilme(posfilme);
 					}else {
 						System.out.println("Operação cancelada");
 					}
@@ -69,7 +76,9 @@ public class Program {
 				break;
 				
 			case 4:
-				Arquivo.sortear();
+				//Arquivo.sortear();
+				System.out.println("Vetor");
+				Backup.sortear();
 				System.out.println();
 				break;
 			
