@@ -122,8 +122,7 @@ public class Arquivo {
 	
 	public static void excluirFilme(int pos) throws IOException {
 	    
-		if(){
-	    	
+		if(assistidos.get(pos) != null){	    	
 	        System.out.println("Filme removido com sucesso.");
 	    } else {
 	        System.out.println("Filme não encontrado.");

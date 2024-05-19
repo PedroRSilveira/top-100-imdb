@@ -3,7 +3,6 @@ package application;
 import java.io.IOException;
 import java.util.Scanner;
 
-import entities.Arquivo;
 import entities.Backup;
 import entities.Filme;
 
@@ -14,7 +13,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("\t\t\tSeja bem vindo ao sistema de registros do top 100 filmes mais bem avaliados do IMDb\n"
-						  + "\t\t\t\tSeu objetivo é assistir 100 filmes, até agora você assistiu " + Arquivo.lerLista().size() + " filmes\n");
+						  + "\t\t\t\tSeu objetivo é assistir 100 filmes, até agora você assistiu " + Backup.contarFilmesAssistidos() + " filmes\n");
 		
 		int opcao;
 		do {
@@ -50,7 +49,7 @@ public class Program {
 				break;
 				
 			case 3:
-				System.out.println("Qual filme (posição) quer editar?");
+				System.out.print("Qual filme (posição) quer editar? ");
 				int posfilme = sc.nextInt();
 				if(posfilme < 0 || posfilme > 100) {
 					System.out.println("Valor inválido, escolha um número entre 1 e 100\n");
