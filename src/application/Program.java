@@ -3,7 +3,7 @@ package application;
 import java.io.IOException;
 import java.util.Scanner;
 
-import entities.Backup;
+import entities.Arquivo;
 import entities.Filme;
 
 public class Program {
@@ -12,9 +12,13 @@ public class Program {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\t\t\tSeja bem vindo ao sistema de registros do top 100 filmes mais bem avaliados do IMDb\n"
-						  + "\t\t\t\tSeu objetivo é assistir 100 filmes, até agora você assistiu " + Backup.contarFilmesAssistidos() + " filmes\n");
-		
+		if(Arquivo.contarFilmesAssistidos() < 100) {
+			System.out.println("\t\t\tSeja bem vindo ao sistema de registros do top 100 filmes mais bem avaliados do IMDb\n"
+							  + "\t\t\t\tSeu objetivo é assistir 100 filmes, até agora você assistiu " + Arquivo.contarFilmesAssistidos() + " filmes\n");
+		}else {
+			System.out.println("\t\t\tSeja bem vindo ao sistema de registros do top 100 filmes mais bem avaliados do IMDb\n"
+					  + "\t\t\t\tParabéns, você assistiu os 100 filmes mais bem avaliados do IMDb");
+		}
 		int opcao;
 		do {
 			System.out.println("O que quer fazer agora?"
@@ -29,9 +33,7 @@ public class Program {
 			
 			switch(opcao) {
 			case 1:
-				//Arquivo.imprimirLista();
-				System.out.println("\nVetor:");
-				Backup.imprimirLista();
+				Arquivo.imprimirLista();
 				System.out.println();
 				break;
 				
@@ -42,9 +44,7 @@ public class Program {
 				System.out.print("Digite a posição no ranking do filme: ");
 				Integer pos = sc.nextInt();
 				Filme filme = new Filme(nome, pos);
-				//Arquivo.adicionarFilme(filme);
-				System.out.println("\nVetor");
-				Backup.adicionarFilme(filme);
+				Arquivo.adicionarFilme(filme);
 				System.out.println();
 				break;
 				
@@ -54,18 +54,15 @@ public class Program {
 				if(posfilme < 0 || posfilme > 100) {
 					System.out.println("Valor inválido, escolha um número entre 1 e 100\n");
 				}else {
-					//Arquivo.editarFilme(posfilme);
 					System.out.println("Você quer editar o nome/posição ou excluir um filme assistido?"
 									  + "\n1. Nome/Posição"
 									  + "\n2. Excluir"
 									  + "\n3. Cancelar");
 					int opc = sc.nextInt();
 					if(opc == 1) {
-						//Arquivo.editarFilme(posfilme);
-						Backup.editarFilme(posfilme);
+						Arquivo.editarFilme(posfilme);
 					}else if(opc == 2) {
-						//Arquivo.excluirFilme(posfilme);
-						Backup.excluirFilme(posfilme);
+						Arquivo.excluirFilme(posfilme);
 					}else {
 						System.out.println("Operação cancelada");
 					}
@@ -75,9 +72,7 @@ public class Program {
 				break;
 				
 			case 4:
-				//Arquivo.sortear();
-				System.out.println("Vetor");
-				Backup.sortear();
+				Arquivo.sortear();
 				System.out.println();
 				break;
 			
