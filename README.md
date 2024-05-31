@@ -1,5 +1,5 @@
 # top-100-imdb
-
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/PedroRSilveira/top-100-imdb/blob/main/LICENSE)
 # Sobre o projeto
 
 top-100-imdb tem como objetivo registrar quais dos filmes que estão no top 100 mais bem avaliados do IMDb o usuário já assistiu.
